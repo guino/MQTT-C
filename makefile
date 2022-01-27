@@ -9,6 +9,11 @@ BINDIR = bin
 
 all: $(BINDIR) $(MQTT_C_UNITTESTS) $(MQTT_C_EXAMPLES)
 
+mqtt_pub: $(BINDIR) bin/mqtt_pub
+
+bin/mqtt_pub: examples/mqtt_pub.c $(MQTT_C_SOURCES)
+	$(CC) $(CFLAGS) $^ -lpthread -static -o $@
+
 bin/simple_%: examples/simple_%.c $(MQTT_C_SOURCES)
 	$(CC) $(CFLAGS) $^ -lpthread -o $@
 
